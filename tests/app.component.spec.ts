@@ -5,7 +5,11 @@ import { AppComponent } from '../src/app/app.component';
 describe('AppComponent', () => {
 
   beforeEach(async () => {
+
+    let appComponent: AppComponent;
+
     await TestBed.configureTestingModule({
+      providers: [AppComponent],
       imports: [
         RouterTestingModule
       ],
@@ -13,6 +17,8 @@ describe('AppComponent', () => {
         AppComponent
       ],
     }).compileComponents();
+    appComponent = TestBed.inject(AppComponent);
+
   });
 
 
@@ -34,16 +40,21 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     
-    const h1 = compiled.querySelector('h1');
+    const h1 = compiled.querySelector('h1'); // look for the h1
     expect( h1?.textContent ).toContain( component.title );
   });
 
-  test('debe hacer match con el snapshot', () => {
+  test('should test if changes on html', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
+    fixture.detectChanges(); // detect changes 
     const compiled = fixture.nativeElement as HTMLElement;
     expect( compiled ).toMatchSnapshot();
 
   })
 
+  it('adds  variables', () => {
+    const fixture = TestBed.inject(AppComponent);
+    jest.spyOn(fixture, 'sumar')
+    expect(fixture.sumar).toBeCalled
+  })
 });

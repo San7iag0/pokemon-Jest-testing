@@ -9,3 +9,13 @@ exports[`AppComponent debe hacer match con el snapshot 1`] = `
   </h1>
 </div>
 `;
+
+exports[`AppComponent should test if changes on html 1`] = `
+<div
+  id="root3"
+>
+  <h1>
+    angular-testing
+  </h1>
+</div>
+`;
